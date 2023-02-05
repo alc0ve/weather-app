@@ -60,6 +60,8 @@ var showCityForecastNow = function (city, data) {
 
     currentHumidity = data.list[0].main.humidity;
     console.log(currentHumidity);
+    cityHumidity = $('#current-city-humidity');
+    cityHumidity.text(currentHumidity + "%");
 }
 
 
