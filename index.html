@@ -34,14 +34,14 @@
 
         <!-- Right side display current city and 5day forecast -->
         <div class="main-weather-container col-6">
-            
+
             <!-- Current city container -->
             <div class="card current-city-title" style="columns: -6px;">
                 <div class="card-body">
                     <div class="d-flex">
                         <h4 id="current-city-name" class="card-title m-1"></h4>
                         <h4 id="current-date" class="m-1"></h4>
-                        <img src="" id="icon">
+                        <img src="" id="current-weather-icon">
                     </div>
                     <p>Temp: <span id="current-city-temp"></span></p><br>
                     <p>Wind: <span id="current-city-wind"></span></p><br>
@@ -54,7 +54,8 @@
             <div id="cities-container" class="d-flex justify-content-evenly">
                 <div class="card text-white bg-primary mb-3 w-100 h-100">
                     <div class="card-body">
-                        <h5 class="card-title">Date</h5>
+                        <h5 class="card-title" id="1-date">Date</h5>
+                        <img src="" id="1-icon">
                         <p>Temp: <span id="1-temp"></span></p>
                         <p>Wind: <span id="1-wind"></span></p>
                         <p>Humidity: <span id="1-humidity"></span></p>
