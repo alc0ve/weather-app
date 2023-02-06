@@ -1,6 +1,7 @@
 var APIKey = '4532a034efa99547e19a1354eab8e09d';
 var searchBtn = $('#searchBtn');
 
+//getting city input coordinates
 var getCurrentCityCoords = function () {
     var cityInput = $('#input-city').val().trim();
     var queryURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityInput + "&limit=5" + "&appid=" + APIKey;
@@ -19,6 +20,7 @@ var getCurrentCityCoords = function () {
         })
 };
 
+//getting city input weather data
 var getCurrentCityForecast = function (location) {
     let { lat, lon } = location;
     let city = location.name;
@@ -36,16 +38,25 @@ var getCurrentCityForecast = function (location) {
         .then(function (data) {
             console.log(data);
             showCityForecastNow(city, data)
-            // doFiveDay(data);
+            setSavedSearches(location)
         })
 }
 
+//showing city input weather forecast, including 5 day forecast
 var showCityForecastNow = function (city, data) {
-    //city, date, weather icon, temp, wind, humidit
+    //city, date, weather icon, temp, wind, humidity
+
+    //could I do localstorage set item in this function..?
+    //do a get item in a separate function with a click event?
+
+    //used vanilla js instead here to show '5 day forecast' area blank prior to search
     // var cityContainer = $('#cities-container')
     document.getElementById('cities-container').innerHTML = ''
+
+    //start looping through days, showing weather data pulled from API
     for (let index = 0; index <= 5; index++) {
 
+        //setting all variables used; icon is used with vanilla-- how do jQuery way?
         var cityName = $('#current-city-name').text(city);
         var today = dayjs();
         var todayAfter = today.add(index, 'day');
@@ -59,31 +70,7 @@ var showCityForecastNow = function (city, data) {
         cityHumidity = $('#current-city-humidity');
         currentHumidity = data.list[index].main.humidity
 
-        // cityName.text(city);
-
-        // var today = dayjs();
-        // $('#current-date').text(today.format('(' + 'MM/DD/YYYY' + ')'));
-
-        // currentTemp = data.list[index].main.temp;
-        // cityTemp = $('#current-city-temp');
-        // cityTemp.text(currentTemp + " ºF");
-
-        // weatherIcon = data.list[index].weather[0].icon;
-        // // currentWIcon = $("current-weather-icon");
-        // // currentWIcon.attr('img', `https://openweathermap.org/img/w/${weatherIcon}.png`);
-        // displayIcon = `https://openweathermap.org/img/w/${weatherIcon}.png`
-        // document.getElementById("current-weather-icon").src = displayIcon;
-
-        // currentWind = data.list[index].wind.speed;
-        // cityWind = $('#current-city-wind');
-        // cityWind.text(currentWind + " MPH");
-
-        // currentHumidity = data.list[index].main.humidity;
-        // cityHumidity = $('#current-city-humidity');
-        // cityHumidity.text(currentHumidity + "%");
-
-        // var cityContainer =$('#cities-container')
-        // current day weather
+        //Current day forecast
         if (index == 0) {
             cityName;
             $('#current-date').text(today.format('(' + 'MM/DD/YYYY' + ')'));
@@ -92,12 +79,14 @@ var showCityForecastNow = function (city, data) {
             cityWind.text(currentWind + " MPH");
             cityHumidity.text(currentHumidity + "%");
         }
-        // 5 day forecast
+
+        //5 day forecast
         if (index > 0) {
-                document.getElementById('cities-container').innerHTML +=`
+            document.getElementById('cities-container').innerHTML +=
+                `
                 <div class="card text-white bg-primary mb-3 w-100 h-100">
                 <div class="card-body">
-                    <h5>${todayAfter}</h5>
+                    <h5>${todayAfter.format('MM/DD/YYYY')}</h5>
                     <img src=${displayIcon}>
                     <p>Temp: ${currentTemp} ºF</p>
                     <p>Wind: ${currentWind} MPH</p>
@@ -105,41 +94,41 @@ var showCityForecastNow = function (city, data) {
                 </div>
             </div>
             `
-        }  
         }
     }
 
-// setSavedSearches(city); 
+    //local storage functions
+    setSavedSearches(city);
+    getSavedSearches();
+}
 
 
-
-// var doFiveDay = function (data) {
-//     //date, weather icon, temp, wind, humidity
-//     var cardTitle = dayjs();
-//     $("#1-date").text(cardTitle.format('MM/DD/YYYY'));
-
-//     temp1 = data.list[1].main.temp;
-//     cityTemp1 = $("#1-temp");
-//     cityTemp1.text(temp1 + " ºF");
-
-
-// }
-
+//on search button click-> pulls weather,etc. function
 searchBtn.on('click', function () {
     console.log("this is the search button");
     getCurrentCityCoords();
 })
 
-// var setSavedSearches = function (city, savedSearches) {
-//     var savedSearches = { weatherIcon, currentTemp, currentWind, currentHumidity };
-//     console.log(city);
-//     console.log(savedSearches);
-//     //stingify to convert forecast objects to string
-//     localStorage.setItem(city, JSON.stringify(savedSearches));
-// }
 
-// var getSavedSearches = function () {
-//     //create buttons to store city name in html; when button is clicked show info for that city in past searches
-//     var lastWeather = JSON.parse(localStorage.getItem("savedSearches"));
-//     console.log(lastWeather);
-// }
+//saving searches in local storage
+var setSavedSearches = function (location) {
+    var searchInput = location.name;
+
+    //if there is nothing saved at the start then save an empty array
+    //will not save as an array without the null part???
+    // if (localStorage.getItem('city') == null) {
+    localStorage.setItem('city', '[]');
+    // }
+
+    //get saved city data and add on the next search input... will work with the null part...
+    var savedCity = JSON.parse(localStorage.getItem('city'));
+    savedCity.push(searchInput);
+
+    //save the saved and new city input to local storage
+    localStorage.setItem('city', JSON.stringify(savedCity));
+}
+
+//geting data from local storage
+var getSavedSearches = function () {
+
+}

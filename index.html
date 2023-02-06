@@ -28,12 +28,14 @@
                     aria-describedby="button-addon2">
                 <button id="searchBtn" class="btn btn-primary opacity-75" type="button">Search</button>
             </div>
+            <!-- search history city button -->
+            <div id="search-history" class="d-grid gap-2 mt-2">
+                <button id="historyBtn" class="btn btn-secondary" type="button"></button>
+            </div>
         </div>
 
-        <!-- Search history -->
-
         <!-- Right side display current city and 5day forecast -->
-        <div class="main-weather-container col-6">
+        <div class="main-weather-container col-7">
 
             <!-- Current city container -->
             <div class="card current-city-title" style="columns: -6px;">
@@ -51,49 +53,7 @@
 
             <!-- 5 day forecast container -->
             <h5 class="mt-1">5-Day Forecast:</h5>
-            <div id="cities-container" class="d-flex justify-content-evenly">
-                <div class="card text-white bg-primary mb-3 w-100 h-100">
-                    <div class="card-body">
-                        <h5 class="card-title" id="1-date">Date</h5>
-                        <img src="" id="1-icon">
-                        <p>Temp: <span id="1-temp"></span></p>
-                        <p>Wind: <span id="1-wind"></span></p>
-                        <p>Humidity: <span id="1-humidity"></span></p>
-                    </div>
-                </div>
-                <div class="card text-white bg-primary mb-3 w-100 h-100">
-                    <div class="card-body">
-                        <h5 class="card-title">Date</h5>
-                        <p>Temp: <span id="2-temp"></span></span></p>
-                        <p>Wind: <span id="2-wind"></span></p>
-                        <p>Humidity: <span id="2-humidity"></span></p>
-                    </div>
-                </div>
-                <div class="card text-white bg-primary mb-3 w-100 h-100">
-                    <div class="card-body">
-                        <h5 class="card-title">Date</h5>
-                        <p>Temp: <span id="3-temp"></span></p>
-                        <p>Wind: <span id="3-wind"></span></p>
-                        <p>Humidity: <span id="3-humidity"></span></p>
-                    </div>
-                </div>
-                <div class="card text-white bg-primary mb-3 w-100 h-100">
-                    <div class="card-body">
-                        <h5 class="card-title">Date</h5>
-                        <p>Temp: <span id="4-temp"></span></p>
-                        <p>Wind: <span id="4-wind"></span></p>
-                        <p>Humidity: <span id="4-humidity"></span></p>
-                    </div>
-                </div>
-                <div class="card text-white bg-primary mb-3 w-100 h-100">
-                    <div class="card-body">
-                        <h5 class="card-title">Date</h5>
-                        <p>Temp: <span id="5-temp"></span></p>
-                        <p>Wind: <span id="5-wind"></span></p>
-                        <p>Humidity: <span id="5-humidity"></span></p>
-                    </div>
-                </div>
-            </div>
+            <div id="cities-container" class="d-flex justify-content-evenly"></div>
 
         </div>
 
