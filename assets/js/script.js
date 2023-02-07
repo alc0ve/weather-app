@@ -1,5 +1,7 @@
 var APIKey = '4532a034efa99547e19a1354eab8e09d';
 var searchBtn = $('#searchBtn');
+var searchHistory = [];
+
 
 //getting city input coordinates
 var getCurrentCityCoords = function () {
@@ -13,6 +15,11 @@ var getCurrentCityCoords = function () {
         })
         .then(function (data) {
             console.log(data[0]);
+            searchHistory.push(cityInput);
+            localStorage.setItem('city', JSON.stringify(searchHistory));
+
+            //on load -> getitem, json parse that array, run a for loop, append returned on for loop to button
+            //each button will have a class; fx 
             getCurrentCityForecast(data[0]);
             var lat = data[0].lat
             var lon = data[0].lon
@@ -38,19 +45,13 @@ var getCurrentCityForecast = function (location) {
         .then(function (data) {
             console.log(data);
             showCityForecastNow(city, data)
-            setSavedSearches(location)
+
         })
 }
 
 //showing city input weather forecast, including 5 day forecast
 var showCityForecastNow = function (city, data) {
-    //city, date, weather icon, temp, wind, humidity
 
-    //could I do localstorage set item in this function..?
-    //do a get item in a separate function with a click event?
-
-    //used vanilla js instead here to show '5 day forecast' area blank prior to search
-    // var cityContainer = $('#cities-container')
     document.getElementById('cities-container').innerHTML = ''
 
     //start looping through days, showing weather data pulled from API
@@ -97,8 +98,6 @@ var showCityForecastNow = function (city, data) {
         }
     }
 
-    //local storage functions
-    setSavedSearches(city);
     getSavedSearches();
 }
 
@@ -109,26 +108,13 @@ searchBtn.on('click', function () {
     getCurrentCityCoords();
 })
 
-
-//saving searches in local storage
-var setSavedSearches = function (location) {
-    var searchInput = location.name;
-
-    //if there is nothing saved at the start then save an empty array
-    //will not save as an array without the null part???
-    // if (localStorage.getItem('city') == null) {
-    localStorage.setItem('city', '[]');
-    // }
-
-    //get saved city data and add on the next search input... will work with the null part...
-    var savedCity = JSON.parse(localStorage.getItem('city'));
-    savedCity.push(searchInput);
-
-    //save the saved and new city input to local storage
-    localStorage.setItem('city', JSON.stringify(savedCity));
-}
-
-//geting data from local storage
+ //geting data from local storage
 var getSavedSearches = function () {
-
+    var cityArray = JSON.parse(window.localStorage.getItem('city')) || []
+    var historyBtn = document.getElementById('historyBtn');
+    for (let index = 0; index <= cityArray.length; index++)
+    document.getElementById('search-history').innerHTML += 
+    `
+    <button id="historyBtn" class="btn btn-secondary" type="button">${cityArray[index]}</button>
+    `
 }
