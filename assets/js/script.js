@@ -15,16 +15,21 @@ var getCurrentCityCoords = function () {
         .then(function (data) {
             console.log(data[0]);
 
+            getCurrentCityForecast(data[0]);
+            var lat = data[0].lat
+            var lon = data[0].lon
+            console.log(lat, lon);
+
+            //local storage setting, getting, and appending to gray history buttons
             searchHistory.push(cityInput);
             localStorage.setItem('city', JSON.stringify(searchHistory));
 
             var cityArray = JSON.parse(window.localStorage.getItem('city')) || [];
             var historyBtn = document.getElementById('historyBtn');
 
-            console.log(cityArray);
-            console.log(searchHistory);
+            document.getElementById('search-history').innerHTML="";
         
-            for (let index = 0; index <= cityArray.length; index++) {
+            for (let index = 0; index < cityArray.length; index++) {
                 if (!cityArray.includes(searchHistory)) {
                     console.log("search exists!");
                 }
@@ -34,11 +39,6 @@ var getCurrentCityCoords = function () {
             <button id="historyBtn" class="btn btn-secondary" type="button">${cityArray[index]}</button>
             `
             }
-
-            getCurrentCityForecast(data[0]);
-            var lat = data[0].lat
-            var lon = data[0].lon
-            console.log(lat, lon);
         })
 };
 
@@ -113,7 +113,6 @@ var showCityForecastNow = function (city, data) {
         }
     }
 
-    getSavedSearches();
 }
 
 
@@ -123,30 +122,18 @@ searchBtn.on('click', function () {
     getCurrentCityCoords();
 })
 
+//enter button will now work to search
 $('#input-city').keypress(function (event) {
     var keycode = (event.keycode ? event.keycode : event.which);
     if (keycode === 13) {
         console.log("enter");
         getCurrentCityCoords();
+        event.preventDefault();
+        $('#input-city').html("");
     }
 })
 
-//geting data from local storage
-var getSavedSearches = function () {
-    // var cityArray = JSON.parse(window.localStorage.getItem('city')) || [];
-    // var historyBtn = document.getElementById('historyBtn');
 
-
-    // for (let index = 0; index <= cityArray.length; index++) {
-    //     if (!cityArray.includes(searchHistory)) {
-    //         console.log("search exists!");
-    //     }
-
-    //     document.getElementById('search-history').innerHTML +=
-    //         `
-    // <button id="historyBtn" class="btn btn-secondary" type="button">${cityArray[index]}</button>
-    // `
-}
     // historyBtn.on('click', function() {
     //     showCityForecastNow();
     // })
