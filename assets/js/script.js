@@ -2,7 +2,6 @@ var APIKey = '4532a034efa99547e19a1354eab8e09d';
 var searchBtn = $('#searchBtn');
 var searchHistory = [];
 
-
 //getting city input coordinates
 var getCurrentCityCoords = function () {
     var cityInput = $('#input-city').val().trim();
@@ -15,11 +14,27 @@ var getCurrentCityCoords = function () {
         })
         .then(function (data) {
             console.log(data[0]);
+
             searchHistory.push(cityInput);
             localStorage.setItem('city', JSON.stringify(searchHistory));
 
-            //on load -> getitem, json parse that array, run a for loop, append returned on for loop to button
-            //each button will have a class; fx 
+            var cityArray = JSON.parse(window.localStorage.getItem('city')) || [];
+            var historyBtn = document.getElementById('historyBtn');
+
+            console.log(cityArray);
+            console.log(searchHistory);
+        
+            for (let index = 0; index <= cityArray.length; index++) {
+                if (!cityArray.includes(searchHistory)) {
+                    console.log("search exists!");
+                }
+        
+                document.getElementById('search-history').innerHTML +=
+                    `
+            <button id="historyBtn" class="btn btn-secondary" type="button">${cityArray[index]}</button>
+            `
+            }
+
             getCurrentCityForecast(data[0]);
             var lat = data[0].lat
             var lon = data[0].lon
@@ -108,13 +123,30 @@ searchBtn.on('click', function () {
     getCurrentCityCoords();
 })
 
- //geting data from local storage
+$('#input-city').keypress(function (event) {
+    var keycode = (event.keycode ? event.keycode : event.which);
+    if (keycode === 13) {
+        console.log("enter");
+        getCurrentCityCoords();
+    }
+})
+
+//geting data from local storage
 var getSavedSearches = function () {
-    var cityArray = JSON.parse(window.localStorage.getItem('city')) || []
-    var historyBtn = document.getElementById('historyBtn');
-    for (let index = 0; index <= cityArray.length; index++)
-    document.getElementById('search-history').innerHTML += 
-    `
-    <button id="historyBtn" class="btn btn-secondary" type="button">${cityArray[index]}</button>
-    `
+    // var cityArray = JSON.parse(window.localStorage.getItem('city')) || [];
+    // var historyBtn = document.getElementById('historyBtn');
+
+
+    // for (let index = 0; index <= cityArray.length; index++) {
+    //     if (!cityArray.includes(searchHistory)) {
+    //         console.log("search exists!");
+    //     }
+
+    //     document.getElementById('search-history').innerHTML +=
+    //         `
+    // <button id="historyBtn" class="btn btn-secondary" type="button">${cityArray[index]}</button>
+    // `
 }
+    // historyBtn.on('click', function() {
+    //     showCityForecastNow();
+    // })
