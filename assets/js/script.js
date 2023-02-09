@@ -6,7 +6,7 @@ var historyBtn = $('#historyBtn');
 //getting city input coordinates
 var getCurrentCityCoords = function () {
     var cityInput = $('#input-city').val().trim();
-    var queryURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityInput + "&limit=5" + "&appid=" + APIKey;
+    var queryURL = "https://api.openweathermap.org/geo/1.0/direct?q=" + cityInput + "&limit=5" + "&appid=" + APIKey;
 
     fetch(queryURL)
 
@@ -53,7 +53,7 @@ var getCurrentCityForecast = function (location) {
     console.log(location);
     console.log(location.name);
 
-    var geoTag = "http://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey + "&units=imperial";
+    var geoTag = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey + "&units=imperial";
 
     fetch(geoTag)
 
