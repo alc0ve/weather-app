@@ -1,6 +1,7 @@
 var APIKey = '4532a034efa99547e19a1354eab8e09d';
 var searchBtn = $('#searchBtn');
 var searchHistory = [];
+var historyBtn = $('#historyBtn');
 
 //getting city input coordinates
 var getCurrentCityCoords = function () {
@@ -27,7 +28,7 @@ var getCurrentCityCoords = function () {
             var cityArray = JSON.parse(window.localStorage.getItem('city')) || [];
             var historyBtn = document.getElementById('historyBtn');
 
-            document.getElementById('search-history').innerHTML="";
+            document.getElementById('search-history').innerHTML='';
         
             for (let index = 0; index < cityArray.length; index++) {
                 if (!cityArray.includes(searchHistory)) {
@@ -38,7 +39,10 @@ var getCurrentCityCoords = function () {
                     `
             <button id="historyBtn" class="btn btn-secondary" type="button">${cityArray[index]}</button>
             `
+
             }
+
+
         })
 };
 
@@ -122,6 +126,14 @@ searchBtn.on('click', function () {
     getCurrentCityCoords();
 })
 
+
+
+// historyBtn.on('click', function() {
+//     console.log("is this thing on");
+//   city = $(this).text();
+//   showCityForecastNow();
+// }) ;
+
 //enter button will now work to search
 $('#input-city').keypress(function (event) {
     var keycode = (event.keycode ? event.keycode : event.which);
@@ -133,7 +145,3 @@ $('#input-city').keypress(function (event) {
     }
 })
 
-
-    // historyBtn.on('click', function() {
-    //     showCityForecastNow();
-    // })

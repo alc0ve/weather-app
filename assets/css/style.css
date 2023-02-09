@@ -7,3 +7,9 @@
 #cities-container {
     gap: 7px;
 }
+
+@media (min-width: 768px) { 
+    .card-body {
+        width: auto;
+    }
+}
