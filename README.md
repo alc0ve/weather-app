@@ -12,9 +12,13 @@ I started this application with nothing. I created a directory for the entire ap
 
 Upon opening application, there will be no data but placeholders for where the user should expect information. User is able to input a city and hit enter, or click search which then will pull weather data, including cloudy/sunny icon, temperature in Farenheit, wind gust, and humidity. It will also display the next 5 days with the same expected data. Searched cities will show up as button under the search bar in which user is able to pull back weather from previously searched. Each city searched will append at the bottom of each button.
 
-![alt text](assets/images/screenshot.png)
+Opening application page:
+![alt text](./assets/images/weather-landing-page.png)
 
-Link to use application: 
+Example city:
+![alt text](./assets/images/weatherapp-example.png)
+
+Link to use application: https://alc0ve.github.io/weather-app/
 
 ## Credits
 
