@@ -6,7 +6,7 @@ Knowing the weather is helpful on any given day, any given location, and at any 
 
 ## Installation
 
-I started this application with nothing. I created a directory for the entire application, then added appropriate folders and files. I started by creating and APIKey from the OpenWeather webpage that provides APIs. After, I had to append the APIKey to the geocode API URL to call and receive a response with longitude and latitude data from a given location. Once I was able to pull that data, I retrieved another URL to pull the forecast data. I created variables for the longitude and latitude values and placed them into the forecast API call URL to pull weather data for user input city. I created a loop that will run through data needed in place of the slots created to display weather information. A local storage was used to store inputted data to retrieve in the side column. Once I had the functions down, I was able to have user input a city and pull data from OpenWeather API!
+I started this application with nothing. I created a directory for the entire application, then added appropriate folders and files. I started by creating and APIKey from the OpenWeather webpage that provides APIs. After, I had to append the APIKey to the geocode API URL to call and receive a response with longitude and latitude data from a given location. Once I was able to pull that data, I retrieved another URL to pull the forecast data. I created variables for the longitude and latitude values and placed them into the forecast API call URL to pull weather data for user input city. I created a loop that will run through data needed in place of the slots created to display weather information. A local storage was used to store inputted data to retrieve in the side column. Once I had the functions down, I was able to have user input a city and pull data from OpenWeather API! Bootstrap was used for CSS styling.
 
 ## Usage
 
@@ -21,3 +21,5 @@ Link to use application:
 Classmates helped me a lot with this assignment! I also thank the TA's provided in the bootcamp.
 
 OpenWeather API site: https://openweathermap.org/forecast5
+
+Bootstrap: https://getbootstrap.com/docs/5.1/getting-started/introduction/
